@@ -1,0 +1,26 @@
+/* App.css */
+
+/* Remove all margins, paddings, borders */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Prevent scrolling overflow, force full height */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+  background-color: #fff;
+}
+
+/* Optional: Remove scrollbars (if still visible) */
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
