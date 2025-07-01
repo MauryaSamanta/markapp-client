@@ -39,7 +39,7 @@ export default function GetReports() {
   }, [type]);
 
   return (
-    <Box sx={{ p: isMobile ? 2 : 5, backgroundColor: '#f5f4f1', minHeight: '100vh' }}>
+    <Box sx={{ p: isMobile ? 2 : 5, backgroundColor: '#f5f4f1', minHeight: '100vh', overflowY:'auto' }}>
       <Button variant="outlined" onClick={() => navigate(-1)} sx={{ mb: 3 }}>
         ← Back
       </Button>
@@ -47,7 +47,7 @@ export default function GetReports() {
       <Typography variant={isMobile ? 'h5' : 'h4'} fontWeight="bold" gutterBottom>
         {type === 'practical' ? 'Practical' : 'Theory'} Attendance Report
       </Typography>
-
+     <Box sx={{ maxHeight: '70vh', overflowY: 'auto' }}>
       <TableContainer component={Paper} elevation={4} sx={{ borderRadius: 3 }}>
         <Table size={isMobile ? 'small' : 'medium'}>
           <TableHead sx={{ backgroundColor: '#f5f5f5' }}>
@@ -87,6 +87,7 @@ export default function GetReports() {
           </TableBody>
         </Table>
       </TableContainer>
+      </Box>
     </Box>
   );
 }
