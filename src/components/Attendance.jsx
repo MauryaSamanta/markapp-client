@@ -82,11 +82,14 @@ const [snackSeverity, setSnackSeverity] = useState('info'); // "info" | "success
     );
   };
 
-  const handleSave = async () => {
+ const handleSave = async () => {
   if (!date || !teacher) {
     alert('Please enter both date and teacher name.');
     return;
   }
+
+  const confirmed = window.confirm(`Are you sure you want to mark attendance for ${students.length} students?`);
+  if (!confirmed) return;
 
   const payload = {
     date,
@@ -96,7 +99,7 @@ const [snackSeverity, setSnackSeverity] = useState('info'); // "info" | "success
       roll: s.RollNo,
       name: s.NameStud,
       status: s.status,
-       batch: type === 'practical' ? batch : undefined,
+      batch: type === 'practical' ? batch : undefined,
     })),
   };
 
@@ -105,11 +108,16 @@ const [snackSeverity, setSnackSeverity] = useState('info'); // "info" | "success
   setSnackOpen(true);
 
   try {
-    const response = await fetch(type==='theory'?'https://markapp-backend.onrender.com/v1/attend/mark/theory':'https://markapp-backend.onrender.com/v1/attend/mark/practical', {
-      method: 'POST',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+    const response = await fetch(
+      type === 'theory'
+        ? 'https://markapp-backend.onrender.com/v1/attend/mark/theory'
+        : 'https://markapp-backend.onrender.com/v1/attend/mark/practical',
+      {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(payload),
+      }
+    );
 
     if (!response.ok) throw new Error('Failed to save');
 
@@ -121,6 +129,7 @@ const [snackSeverity, setSnackSeverity] = useState('info'); // "info" | "success
     setSnackSeverity('error');
   }
 };
+
 
 
   return (
